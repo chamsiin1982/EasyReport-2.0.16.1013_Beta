@@ -16,7 +16,22 @@
     <script src="${ctxPath}/assets/vendor/codemirror/addon/hint/show-hint.js?v=${version}"></script>
     <script src="${ctxPath}/assets/vendor/codemirror/addon/hint/sql-hint.js?v=${version}"></script>
     <script src="${ctxPath}/assets/js/metadata/category.js?v=${version}"></script>
+    
+    <!-- 控制权限  隐藏部分管理权限 -->
+    <% 
+      String userRoles= request.getSession().getAttribute("userRoles").toString();
+    	
+     System.out.println("======"+userRoles);
+      if("24".equals(userRoles)){
+    %>
+    <script src="${ctxPath}/assets/js/metadata/designer_less.js?v=${version}"></script>
+    <%
+      }else{
+    %>
     <script src="${ctxPath}/assets/js/metadata/designer.js?v=${version}"></script>
+    <%
+      }
+    %>
 </head>
 <body class="easyui-layout" id="body-layout">
 <!-- 左边报表分类tree -->

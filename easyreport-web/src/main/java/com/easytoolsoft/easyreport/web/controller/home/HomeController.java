@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 /**
@@ -24,9 +26,10 @@ public class HomeController {
     private MembershipFacade membershipFacade;
 
     @GetMapping(value = {"", "/", "/index"})
-    public String index(@CurrentUser User loginUser, Model model) {
+    public String index(@CurrentUser User loginUser, Model model,HttpServletRequest request) {
         model.addAttribute("roleNames", this.membershipFacade.getRoleNames(loginUser.getRoles()));
         model.addAttribute("user", loginUser);
+        request.getSession().setAttribute("userRoles", loginUser.getRoles() );
         return "home/index";
     }
 

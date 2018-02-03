@@ -8,9 +8,6 @@ var MetaDataDesigner = {
         DesignerMVC.View.resizeDesignerElments();
         DesignerMVC.View.initSqlEditor();
         
-       // DesignerMVC.View.initSqlEditorParam();
-       // DesignerMVC.View.initSqlEditorOrder();
-        
         DesignerMVC.View.initHistorySqlEditor();
         DesignerMVC.View.initPreviewSqlEditor();
         DesignerMVC.View.bindEvent();

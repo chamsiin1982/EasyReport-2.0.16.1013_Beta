@@ -8,3 +8,5 @@ EasyReport
 
 功能介绍请参看原项目介绍
 
+改造效果
+![效果](https://github.com/chamsiin1982/chamsiin1982.github.com/blob/master/2018/02/06/%E4%BD%BF%E7%94%A8JSqlParser%E5%8A%A0%E5%BC%BA%E5%8A%A8%E6%80%81%E6%8B%BC%E6%8E%A5SQL/rebuild_after.png)

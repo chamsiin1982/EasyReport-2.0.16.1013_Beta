@@ -19,10 +19,8 @@
     
     <!-- 控制权限  隐藏部分管理权限 -->
     <% 
-      String userRoles= request.getSession().getAttribute("userRoles").toString();
-    	
-     System.out.println("======"+userRoles);
-      if("24".equals(userRoles)){
+      String userRoles= request.getSession().getAttribute("userRoles").toString();    	
+     if("24".equals(userRoles)){
     %>
     <script src="${ctxPath}/assets/js/metadata/designer_less.js?v=${version}"></script>
     <%
@@ -269,21 +267,30 @@
                                 <option value="checkbox">复选框</option>
                                 <option value="text">文本框</option>
                                 <option value="date">日期</option>
+                                <option value="selectTree">下拉【树】单选</option>
+                                <option value="selectTreeMul">下拉【树】多选</option>
                             </select></td>
                             <td>内容来源类型</td>
                             <td ><select class="easyui-combobox" id="report-query-param-dataSource"
                                                     name="dataSource" data-options="required:true" style="width:150px">
                                 <option value="sql">SQL语句</option>
-                                <option value="text">文本字符串</option>
+                                <option value="tree">SQL语句|树形</option>
+                                <option value="text">文本字符串</option>                                
                                 <option value="none">无内容</option>
                             </select></td>
-                            
+                            <td>
+                            	树根节点值
+                            </td>
+                            <td>
+                            	<input class="easyui-textbox" type="text" id="report-query-param-treeRootValue" name="treeRootValue"
+                                        style="width:150px"/>
+                            </td>
                         </tr>                                             
                         <tr>
                             <td>内容:</td>
                             <td colspan="7">
                             <textarea id="report-query-param-content" name="content" style="width: 95%; height: 100px;"
-                                      placeholder="(select col1 as name,col2 as text from table ...) or (name1,text1|name2,text2|...) or (name1|name2|...)"></textarea>
+                                      placeholder="(select col1 as name,col2 as text from table ...) or (select col1 as name,col2 as text,col3 as parent from table ...) or (name1,text1|name2,text2|...) or (name1|name2|...)"></textarea>
                                 <input type="hidden" id="report-query-param-gridIndex" value="0"/>
                                 <input type="hidden" id="report-query-param-json"/>
                         </tr>

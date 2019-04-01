@@ -11,8 +11,19 @@ public abstract class HtmlFormElement {
     protected boolean isRequired;
     private String defaultText;
     private String defaultValue;
+    
+    //添加树 根节点值
+    private String treeRootValue=null;
 
-    protected HtmlFormElement(String name, String text) {
+    public String getTreeRootValue() {
+		return treeRootValue;
+	}
+
+	public void setTreeRootValue(String treeRootValue) {
+		this.treeRootValue = treeRootValue;
+	}
+
+	protected HtmlFormElement(String name, String text) {
         this.name = name;
         this.text = text;
     }

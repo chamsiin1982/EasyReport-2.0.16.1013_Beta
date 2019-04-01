@@ -28,7 +28,7 @@
         <div id="footer-left">
             <div>报表中心</div>
         </div>
-        <div id="footer-right">版权 © 2014-2017 南京瀚和软件技术有限公司.</div>
+        <div id="footer-right">版权 © 2019 亚信科技（南京）有限公司.</div>
     </div>
 </div>
 <!-- tabs右键菜单  -->

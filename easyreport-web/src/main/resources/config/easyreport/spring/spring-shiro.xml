@@ -22,6 +22,7 @@
                 /assets/** = anon
                 /dynamic/** = anon
                 /error/** = anon
+                /report/** = anon
                 /membership/login = anon
                 /membership/authenticate = anon
                 /membership/logout = logout
@@ -69,8 +70,12 @@
     </bean>
 
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        
+        <!-- 会话超时时间，单位：毫秒  -->
         <property name="globalSessionTimeout" value="1800000"/>
         <property name="deleteInvalidSessions" value="true"/>
+        
+        <!-- 定时清理失效会话, 清理用户直接关闭浏览器造成的孤立会话  value="true" -->
         <property name="sessionValidationSchedulerEnabled" value="true"/>
         <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
         <property name="sessionDAO" ref="sessionDAO"/>

@@ -7,6 +7,7 @@
     <%@ include file="/WEB-INF/jsp/includes/common.jsp" %>
     <%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
     <%@ include file="/WEB-INF/jsp/includes/report.jsp" %>
+    
 </head>
 <body class="easyui-layout">
 <div region="center" style="border-top-width: 0">

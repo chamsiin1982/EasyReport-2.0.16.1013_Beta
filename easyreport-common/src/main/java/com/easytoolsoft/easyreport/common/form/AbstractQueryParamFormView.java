@@ -6,6 +6,7 @@ import com.easytoolsoft.easyreport.common.form.control.HtmlComboBox;
 import com.easytoolsoft.easyreport.common.form.control.HtmlDateBox;
 import com.easytoolsoft.easyreport.common.form.control.HtmlFormElement;
 import com.easytoolsoft.easyreport.common.form.control.HtmlTextBox;
+import com.easytoolsoft.easyreport.common.form.control.HtmlTreeComboBox;
 import com.easytoolsoft.easyreport.common.pair.NameTextPair;
 
 import java.util.ArrayList;
@@ -79,6 +80,12 @@ public abstract class AbstractQueryParamFormView {
         if ("combobox".equals(element.getType())) {
             return new NameTextPair(element.getName(), this.getComboBoxText((HtmlComboBox) element));
         }
+        
+        //树形下拉
+        if ("treecombox".equals(element.getType())) {
+            return new NameTextPair(element.getName(), this.getTreeComboBoxText((HtmlTreeComboBox) element));
+        }
+        
         if ("checkboxlist".equals(element.getType())) {
             return new NameTextPair(element.getName(), this.getCheckboxListText((HtmlCheckBoxList) element));
         }
@@ -92,6 +99,8 @@ public abstract class AbstractQueryParamFormView {
     protected abstract String getCheckBoxText(HtmlCheckBox checkBox);
 
     protected abstract String getComboBoxText(HtmlComboBox comboBox);
+    
+    protected abstract String getTreeComboBoxText(HtmlTreeComboBox treeComboBox);
 
     protected abstract String getCheckboxListText(HtmlCheckBoxList checkBoxList);
 }

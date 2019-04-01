@@ -80,11 +80,22 @@ public class ReportHelper {
     public static void renderByTemplate(String uid, ModelAndView modelAndView, QueryParamFormView formView,
                                         HttpServletRequest request) {
         Report report = reportService.getByUid(uid);
+        //布局列、统计列 展现形式，  展现数据间隔时间
         ReportOptions options = reportService.parseOptions(report.getOptions());
+        
+        //列信息元数据
         List<ReportMetaDataColumn> metaDataColumns = reportService.parseMetaColumns(report.getMetaColumns());
+        
+        //系统内置参数   内置参数  与  request 参数做差减 
         Map<String, Object> buildInParams = tableReportService.getBuildInParameters(request.getParameterMap(), options.getDataRange());
+        
+        //控件参数 加载
         List<HtmlFormElement> dateAndQueryElements = tableReportService.getDateAndQueryParamFormElements(report, buildInParams);
+        
+        //
         HtmlFormElement statColumnFormElements = tableReportService.getStatColumnFormElements(metaDataColumns, 0);
+        
+        //
         List<HtmlFormElement> nonStatColumnFormElements = tableReportService.getNonStatColumnFormElements(metaDataColumns);
         modelAndView.addObject("uid", uid);
         modelAndView.addObject("id", report.getId());
@@ -143,7 +154,7 @@ public class ReportHelper {
         Report report = reportService.getByUid(uid);
         ReportOptions options = reportService.parseOptions(report.getOptions());
         
-        
+        //表单构建
         Map<String, Object> formParams = tableReportService.getFormParameters(parameters, options.getDataRange());
         
         //where query

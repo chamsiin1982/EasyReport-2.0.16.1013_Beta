@@ -26,6 +26,9 @@ public interface Queryer {
      */
     List<ReportQueryParamItem> parseQueryParamItems(String sqlText);
 
+    
+    
+    List<ReportQueryParamItem> parseQueryParamItems2(String sqlText);
     /**
      * 获取报表原始数据行集合
      *

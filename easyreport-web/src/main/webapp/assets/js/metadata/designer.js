@@ -263,7 +263,11 @@ var DesignerMVC = {
                         }, {
                             "name": "copy",
                             "title": "复制"
-                        }, {
+                        },{
+                            "name": "window",
+                            "title": "弹窗"
+                        },                        
+                        {
                             "name": "preview",
                             "title": "预览"
                         }, {
@@ -558,6 +562,9 @@ var DesignerMVC = {
                         if (value == "sql") {
                             return "SQL语句";
                         }
+                        if (value == "tree") {
+                            return "SQL语句|树";
+                        }
                         if (value == "text") {
                             return "文本字符串";
                         }
@@ -796,6 +803,8 @@ var DesignerMVC = {
                     var value = "sql";
                     if (rec.value == "text") {
                         value = 'none';
+                    }else if(rec.value == "tree"){
+                    	value = 'tree';
                     }
                     $('#report-query-param-dataSource').combobox('setValue', value);
                 }
@@ -966,6 +975,9 @@ var DesignerMVC = {
             }
             if (name == "preview") {
                 return DesignerMVC.Controller.preview();
+            }
+            if (name == "window") {
+                return DesignerMVC.Controller.previewInNewWindow();
             }
             if (name == "remove") {
                 return DesignerMVC.Controller.remove();

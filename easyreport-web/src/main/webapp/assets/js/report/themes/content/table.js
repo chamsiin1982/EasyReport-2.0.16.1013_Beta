@@ -4,6 +4,15 @@ var TableReport = {
         TableReportMVC.View.bindEvent();
         TableReportMVC.View.bindValidate();
         TableReportMVC.View.initData();
+        
+        if( $("input.extend_treecombo").length>0 ){
+ 		   
+        	$.each( $("input.extend_treecombo"), function(i,valueHidden){
+        		var treeId= valueHidden.id.split('_')[0];
+        		console.log("======="+valueHidden.value)
+        		$('#'+treeId).combotree('loadData',jQuery.parseJSON(valueHidden.value ) );
+        	});
+        }
     }
 };
 

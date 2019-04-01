@@ -45,7 +45,7 @@ public class PreviewController {
     @Resource
     private ChartReportService chartReportService;
 
-    @OpLog(name = "预览报表")
+    @OpLog(name = "预览报表,加载报表元数据信息")
     @GetMapping(value = {"/uid/{uid}"})
     //@RequiresPermissions("report.designer:preview")
     public ModelAndView preview(@PathVariable String uid) {

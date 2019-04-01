@@ -6,6 +6,7 @@ import com.easytoolsoft.easyreport.common.form.control.HtmlComboBox;
 import com.easytoolsoft.easyreport.common.form.control.HtmlDateBox;
 import com.easytoolsoft.easyreport.common.form.control.HtmlSelectOption;
 import com.easytoolsoft.easyreport.common.form.control.HtmlTextBox;
+import com.easytoolsoft.easyreport.common.form.control.HtmlTreeComboBox;
 
 /**
  * Bootstrapper风格控件报表查询参数表单视图
@@ -127,4 +128,10 @@ public class BootstrapQueryFormView extends AbstractQueryParamFormView implement
         htmlText.append("</div> ");
         return htmlText.toString();
     }
+
+	@Override
+	protected String getTreeComboBoxText(HtmlTreeComboBox treeComboBox) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

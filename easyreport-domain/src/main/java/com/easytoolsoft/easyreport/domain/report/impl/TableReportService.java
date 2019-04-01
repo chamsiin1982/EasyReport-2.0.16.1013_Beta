@@ -7,6 +7,7 @@ import com.easytoolsoft.easyreport.common.form.control.HtmlDateBox;
 import com.easytoolsoft.easyreport.common.form.control.HtmlFormElement;
 import com.easytoolsoft.easyreport.common.form.control.HtmlSelectOption;
 import com.easytoolsoft.easyreport.common.form.control.HtmlTextBox;
+import com.easytoolsoft.easyreport.common.form.control.HtmlTreeComboBox;
 import com.easytoolsoft.easyreport.common.util.DateUtils;
 import com.easytoolsoft.easyreport.engine.ReportGenerator;
 import com.easytoolsoft.easyreport.engine.data.ColumnType;
@@ -401,9 +402,15 @@ public class TableReportService implements ITableReportService {
             queryParam.setDefaultValue(VelocityUtils.parse(queryParam.getDefaultValue(), buildinParams));
             queryParam.setContent(VelocityUtils.parse(queryParam.getContent(), buildinParams));
             String formElement = queryParam.getFormElement().toLowerCase();
+            
             if (formElement.equals("select") || formElement.equalsIgnoreCase("selectMul")) {
                 htmlFormElement = this.getComboBoxFormElements(queryParam, report.getDsId(), buildinParams);
-            } else if (formElement.equals("checkbox")) {
+            } 
+            //添加树形选择器
+            else if (formElement.equals("selecttree") || formElement.equalsIgnoreCase("selecttreeMul")) {
+                htmlFormElement = this.getTreeComboBoxFormElements(queryParam, report.getDsId(), buildinParams);
+            }         
+            else if (formElement.equals("checkbox")) {
                 htmlFormElement = new HtmlCheckBox(queryParam.getName(),queryParam.getText(),
                         queryParam.getRealDefaultValue());
             } else if (formElement.equals("text")) {
@@ -445,6 +452,39 @@ public class TableReportService implements ITableReportService {
         return htmlComboBox;
     }
 
+    
+    /**
+     * 添加树形控件支持
+     * @param queryParam
+     * @param dsId
+     * @param buildinParams
+     * @return
+     */
+    private HtmlTreeComboBox getTreeComboBoxFormElements(QueryParameter queryParam, int dsId,
+            Map<String, Object> buildinParams) {
+			List<ReportQueryParamItem> options = this.getOptions(queryParam, dsId, buildinParams,true);
+			List<HtmlSelectOption> htmlSelectOptions = new ArrayList<>(options.size());
+			
+			if (queryParam.hasDefaultValue()) {
+				htmlSelectOptions.add(new HtmlSelectOption(
+				queryParam.getDefaultText(),
+				queryParam.getDefaultValue(),"", true));
+			}
+			for (int i = 0; i < options.size(); i++) {
+				ReportQueryParamItem option = options.get(i);
+				if (!option.getName().equals(queryParam.getDefaultValue())) {
+					htmlSelectOptions.add(new HtmlSelectOption(option.getText(),
+					option.getName(), option.getParent() ,(!queryParam.hasDefaultValue() && i == 0)));
+				}
+			}
+			
+			HtmlTreeComboBox htmlComboBox = new HtmlTreeComboBox(queryParam.getName(), queryParam.getText(), htmlSelectOptions);
+			htmlComboBox.setTreeRootValue(queryParam.getTreeRootValue());
+			htmlComboBox.setMultipled(queryParam.getFormElement().equals("selectMul"));
+			htmlComboBox.setAutoComplete(queryParam.isAutoComplete());
+			return htmlComboBox;
+    	}
+    
     private void setElementCommonProperities(QueryParameter queryParam, HtmlFormElement htmlFormElement) {
         htmlFormElement.setDataType(queryParam.getDataType());
         htmlFormElement.setHeight(queryParam.getHeight());
@@ -455,10 +495,46 @@ public class TableReportService implements ITableReportService {
         htmlFormElement.setComment(queryParam.getComment());
     }
 
+    
     private List<ReportQueryParamItem> getOptions(QueryParameter queryParam, int dsId,
-                                                  Map<String, Object> buildinParams) {
-        if (queryParam.getDataSource().equals("sql")) {
-            return this.reportService.executeQueryParamSqlText(dsId, queryParam.getContent());
+    		Map<String, Object> buildinParams) {
+		if (queryParam.getDataSource().equals("sql")) {
+			return this.reportService.executeQueryParamSqlText(dsId, queryParam.getContent());
+		}else if(  queryParam.getDataSource().equals("tree")) {
+			return this.reportService.executeQueryParamSqlText2(dsId, queryParam.getContent());
+		}
+		
+		
+		
+		List<ReportQueryParamItem> options = new ArrayList<>();
+		if (queryParam.getDataSource().equals("text") && StringUtils.isNoneBlank(queryParam.getContent())) {
+			HashSet<String> set = new HashSet<>();
+			String[] optionSplits = StringUtils.split(queryParam.getContent(), '|');
+				for (String option : optionSplits) {
+					String[] nameValuePairs = StringUtils.split(option, ',');
+					String name = nameValuePairs[0];
+					String text = nameValuePairs.length > 1 ? nameValuePairs[1] : name;
+					
+					if (!set.contains(name)) {
+						set.add(name);
+						options.add(new ReportQueryParamItem(name, text ));
+					}
+			}
+		}
+		return options;
+}
+
+    /**
+     * 改造，添加树形节点支持
+     * @param queryParam
+     * @param dsId
+     * @param buildinParams
+     * @return
+     */
+    private List<ReportQueryParamItem> getOptions(QueryParameter queryParam, int dsId,
+                                                  Map<String, Object> buildinParams,boolean treeSupport) {
+        if (queryParam.getDataSource().equals("sql")|| queryParam.getDataSource().equals("tree")) {
+            return this.reportService.executeQueryParamSqlText2(dsId, queryParam.getContent());
         }
 
         List<ReportQueryParamItem> options = new ArrayList<>();
@@ -469,9 +545,12 @@ public class TableReportService implements ITableReportService {
                 String[] nameValuePairs = StringUtils.split(option, ',');
                 String name = nameValuePairs[0];
                 String text = nameValuePairs.length > 1 ? nameValuePairs[1] : name;
+                //添加  树形控件支持
+                String parent=nameValuePairs.length > 2 ? nameValuePairs[2] : name;
+                
                 if (!set.contains(name)) {
                     set.add(name);
-                    options.add(new ReportQueryParamItem(name, text));
+                    options.add(new ReportQueryParamItem(name, text ,parent));
                 }
             }
         }

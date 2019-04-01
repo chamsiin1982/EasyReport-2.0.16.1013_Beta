@@ -31,7 +31,19 @@ public class QueryParameter implements Serializable {
     private String isAndOr="";
     private String columnName="";
     private String operator="";
-    /**
+    
+    private String treeRootValue="";
+    
+    
+    public String getTreeRootValue() {
+		return treeRootValue;
+	}
+
+	public void setTreeRootValue(String treeRootValue) {
+		this.treeRootValue = treeRootValue;
+	}
+
+	/**
      * 获取报表查询参数名称
      *
      * @return 报表查询参数名称

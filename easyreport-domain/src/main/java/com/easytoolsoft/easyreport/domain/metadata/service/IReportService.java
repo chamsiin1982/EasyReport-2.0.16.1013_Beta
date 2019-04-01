@@ -33,7 +33,11 @@ public interface IReportService extends ICrudService<Report, ReportExample> {
     List<ReportMetaDataColumn> executeSqlText(int dsId, String sqlText);
 
     List<ReportQueryParamItem> executeQueryParamSqlText(int dsId, String sqlText);
-
+    
+    /*
+     * 三列数据 获取
+     */
+    List<ReportQueryParamItem> executeQueryParamSqlText2(int dsId, String sqlText);
     /**
      * 解析json格式的报表元数据列为ReportMetaDataColumn对象集合
      *

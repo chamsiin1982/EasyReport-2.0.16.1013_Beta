@@ -66,6 +66,44 @@ public abstract class AbstractQueryer {
     }
 
 
+    /**
+     * 添加parent 为树形数据展现添加支持
+     * @param sqlText
+     * @return
+     */
+    public List<ReportQueryParamItem> parseQueryParamItems2(String sqlText) {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        HashSet<String> set = new HashSet<>();
+        List<ReportQueryParamItem> rows = new ArrayList<>();
+
+        try {
+            logger.debug(sqlText);
+            conn = this.getJdbcConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sqlText);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String text = rs.getString("text");
+                String parent = rs.getString("parent");
+                name = (name == null) ? "" : name.trim();
+                text = (text == null) ? "" : text.trim();
+                parent = (parent == null) ? "" : parent.trim();
+                if (!set.contains(name)) {
+                    set.add(name);
+                }
+                rows.add(new ReportQueryParamItem(name, text,parent));
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            JdbcUtils.releaseJdbcResource(conn, stmt, rs);
+        }
+        set.clear();
+        return rows;
+    }
+    
     public List<ReportQueryParamItem> parseQueryParamItems(String sqlText) {
         Connection conn = null;
         Statement stmt = null;

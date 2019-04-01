@@ -109,6 +109,15 @@ public class ReportService
         ReportDataSource reportDataSource = getReportDataSource(dsId);
         return QueryerFactory.create(reportDataSource).parseQueryParamItems(sqlText);
     }
+    
+    @Override
+    /**
+     * 名称需重构  to-do
+     */
+    public List<ReportQueryParamItem> executeQueryParamSqlText2(int dsId, String sqlText) {
+        ReportDataSource reportDataSource = getReportDataSource(dsId);
+        return QueryerFactory.create(reportDataSource).parseQueryParamItems2(sqlText);
+    }
 
     @Override
     public List<ReportMetaDataColumn> parseMetaColumns(String json) {

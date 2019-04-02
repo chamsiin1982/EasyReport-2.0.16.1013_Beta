@@ -13,3 +13,10 @@ EasyReport
 
 ### 2、查询条件支持树形数据
 对层级类数据，支持树形选择
+
+![树形支持](./docs/images/tree_select.png)
+
+SQL配置：注意，树根节点值要填
+
+![SQL配置语句](E:\GitHub\EasyReport-2.0.16.1013_Beta2\docs\images\sql_config.png)
+

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="easy_report" schema="easy_report" type="MySQL - 5.6.20">
+   <tables>
+      <table name="config_dict" numRows="31" remarks="配置字典表" schema="easy_report" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="配置字典ID" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="pid" nullable="false" remarks="父ID" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="2" name="name" nullable="false" remarks="名称" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="key" nullable="false" remarks="" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="value" nullable="false" remarks="" size="1000" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="sequence" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="6" name="comment" nullable="false" remarks="" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="7" name="create_time" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="8" name="update_time" nullable="false" remarks="" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="uk_key" unique="true">
+            <column ascending="true" name="key"/>
+            <column ascending="true" name="pid"/>
+         </index>
+      </table>
+      <table name="datasource" numRows="4" remarks="数据源配置信息表" schema="easy_report" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="数据源ID" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="uid" nullable="false" remarks="数据源唯一ID,由调接口方传入" size="128" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="name" nullable="false" remarks="数据源名称" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="jdbc_url" nullable="false" remarks="数据源连接字符串(JDBC)" size="500" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="user" nullable="false" remarks="数据源登录用户名" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="password" nullable="false" remarks="数据源登录密码" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="comment" nullable="false" remarks="说明备注" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="7" name="create_user" nullable="false" remarks="" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="8" name="create_time" nullable="false" remarks="记录创建时间" size="19" type="DATETIME"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="9" name="update_time" nullable="false" remarks="记录修改时间" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="AK_uk_uid" unique="false">
+            <column ascending="true" name="uid"/>
+         </index>
+      </table>
+      <table name="reporting" numRows="14" remarks="报表信息表" schema="easy_report" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="报表ID" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="pid" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="2" name="ds_id" nullable="false" remarks="数据源ID" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="3" name="uid" nullable="true" remarks="报表唯一ID,由接口调用方传入" size="128" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="name" nullable="false" remarks="报表名称" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="path" nullable="false" remarks="报表树型结构路径" size="500" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="flag" nullable="false" remarks="报表树型节点标志,0为分类节点，1为报表结点" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="7" name="has_child" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="8" name="status" nullable="false" remarks="报表状态（1表示锁定，0表示编辑)" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="9" name="sequence" nullable="false" remarks="报表节点在其父节点中的顺序" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="7" digits="0" id="10" name="data_range" nullable="false" remarks="报表默认展示多少天的数据" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="11" name="layout" nullable="false" remarks="布局形式.1横向;2纵向" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="1" digits="0" id="12" name="stat_column_layout" nullable="true" remarks="统计列布局形式.1横向;2纵向" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="13" name="sql_text" nullable="false" remarks="报表SQL语句" size="65535" type="TEXT"/>
+         <column autoUpdated="false" digits="0" id="14" name="meta_columns" nullable="false" remarks="配置项对象JSON序列化字符串" size="65535" type="TEXT"/>
+         <column autoUpdated="false" digits="0" id="15" name="query_params" nullable="false" remarks="查询条件列属性集合json字符串" size="65535" type="TEXT"/>
+         <column autoUpdated="false" digits="0" id="16" name="comment" nullable="true" remarks="说明备注" size="500" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="17" name="create_user" nullable="false" remarks="创建用户" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="18" name="create_time" nullable="false" remarks="记录创建时间" size="19" type="DATETIME"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="19" name="update_time" nullable="false" remarks="记录修改时间" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="ukuid" unique="false">
+            <column ascending="true" name="uid"/>
+         </index>
+      </table>
+      <table name="reporting_sql_history" numRows="2" remarks="" schema="easy_report" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="报表SQL语句版本历史id" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="report_id" nullable="false" remarks="报表id" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="2" name="sql_text" nullable="false" remarks="报表SQL语句" size="65535" type="TEXT"/>
+         <column autoUpdated="false" digits="0" id="3" name="author" nullable="false" remarks="报表SQL语句当前版本创建者" size="64" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="comment" nullable="false" remarks="报表SQL语句版本历史说明" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="create_time" nullable="false" remarks="报表SQL语句版本历史创建时间" size="19" type="DATETIME"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="6" name="update_time" nullable="false" remarks="报表SQL语句版本历史修改时间" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="reporting_task" numRows="0" remarks="报表任务信息表" schema="easy_report" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="报表任务ID" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="report_ids" nullable="false" remarks="报表ID列表" size="1024" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="peroid" nullable="false" remarks="报表任务执行频率(取值：y每年|M每月|w每周|d每天|h每小时|m每分|s每秒)" size="2" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="interval" nullable="false" remarks="报表任务执行间隔" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="4" name="time" nullable="false" remarks="报表任务执行时间,指定任务什么时间执行" size="8" type="TIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="comment" nullable="false" remarks="报表任务说明" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="create_time" nullable="false" remarks="报表任务记录创建时间" size="19" type="DATETIME"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="7" name="update_time" nullable="false" remarks="报表任务记录修改时间" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="sequence" numRows="509" remarks="" schema="easy_report" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="pos" nullable="false" remarks="" size="10" type="INT"/>
+      </table>
+   </tables>
+</database>

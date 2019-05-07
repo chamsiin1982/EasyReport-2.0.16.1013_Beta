@@ -18,5 +18,5 @@ EasyReport
 
 SQL配置：注意，树根节点值要填
 
-![SQL配置语句](E:\GitHub\EasyReport-2.0.16.1013_Beta2\docs\images\sql_config.png)
+![SQL配置语句](./docs/images/sql_config.png)
 

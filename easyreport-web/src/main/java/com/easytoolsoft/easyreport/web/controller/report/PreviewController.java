@@ -48,9 +48,19 @@ public class PreviewController {
     @OpLog(name = "预览报表,加载报表元数据信息")
     @GetMapping(value = {"/uid/{uid}"})
     //@RequiresPermissions("report.designer:preview")
-    public ModelAndView preview(@PathVariable String uid) {
+    public ModelAndView preview(@PathVariable String uid,HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("report/main");
         modelAndView.addObject("report", ReportHelper.getReportMetaData(uid));
+        
+        //把传参获取到，传至前台
+        if(null != request.getParameterMap() && ! request.getParameterMap().isEmpty())
+        {
+        	modelAndView.addObject("paramMap", JSONObject.toJSONString(request.getParameterMap()));   
+            log.info("paramMap:"+JSONObject.toJSONString(request.getParameterMap()));           
+        }else {
+        	log.error("no paramMap");
+        }
+        
         return modelAndView;
     }
 

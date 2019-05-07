@@ -9,7 +9,6 @@ var TableReport = {
  		   
         	$.each( $("input.extend_treecombo"), function(i,valueHidden){
         		var treeId= valueHidden.id.split('_')[0];
-        		console.log("======="+valueHidden.value)
         		$('#'+treeId).combotree('loadData',jQuery.parseJSON(valueHidden.value ) );
         	});
         }
@@ -46,6 +45,37 @@ var TableReportMVC = {
         bindValidate: function () {
         },
         initData: function () {
+        	//初始化控件值  easyui控件需要判断类型，比较麻烦
+        	if(report_parammap.length>0){
+	        	 var parammap=JSON.parse(report_parammap || {});
+	        	 if(! $.isEmptyObject(parammap)){
+	        		 $.each(parammap,function(key,value){
+	        			 var cc = $('#'+key);
+	        			 var controlType=TableReportMVC.Util.getEasyUIControlType(cc);
+	        			 //需匹配控件类型 设置方法有差别
+	        			 switch ( controlType ){
+	        			 case 'combobox':
+	        				 cc.combobox('setValue', value[0]);    
+	        				 break;
+	        			 case 'combotree':
+	        				 cc.combotree('setValue', value[0]);
+	        				 break;
+	        			 case 'checkbox':
+	        				 cc.checkbox('setValue', value[0]);
+	        				 break;
+	        			 case 'datebox':
+	        				 cc.datebox('setValue', value[0]);
+	        				 break;
+	        			 case 'textbox':
+	        				 cc.textbox('setValue', value[0]);
+	        				 break;
+	        			  //checkbox \checkboxlist\datebox\textbox
+	        			 };
+	        			     			    					        			        			      			 
+	        		 });
+	        	 }
+        	}
+        	//表格初始化
             TableReportMVC.Controller.generate(TableReportMVC.Model.Mode.classic, null);
         }
     },
@@ -56,6 +86,8 @@ var TableReportMVC = {
         }
     },
     Controller: {
+    	
+    	//传参需要把值绑定进初始参数
         generate: function (mode, callback) {
             $('#table-report-isRowSpan').val($('#table-report-isMergeRow').prop('checked'));
             $.ajax({
@@ -116,6 +148,17 @@ var TableReportMVC = {
         }
     },
     Util: {
+    	getEasyUIControlType:function(element){
+    		var plugins = $.parser.plugins;
+    		for(var i=plugins.length-1; i>=0; i--){
+                var ctrl = $(element).data(plugins[i]);
+                //console.log(i + " TARGET " + element + " is PLUGIN " + plugins[i] + "? " + ctrl);
+                if (ctrl){
+                    return plugins[i];
+                }
+    		}
+    		return null;
+    	},
         // 表格中是否跨行
         hasRowSpan: function () {
             var rowspans = $("#easyreport>tbody>tr>td[rowspan]");

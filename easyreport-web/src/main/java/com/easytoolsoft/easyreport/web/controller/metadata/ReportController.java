@@ -168,8 +168,9 @@ public class ReportController
         ReportMetaDataColumn column = new ReportMetaDataColumn();
         column.setName("expr");
         column.setType(4);
-        column.setDataType("DECIMAL");
-        column.setWidth(42);
+        //column.setDataType("DECIMAL");
+        column.setDataType("VARCHAR" );
+        column.setWidth(255);
         return column;
     }
 

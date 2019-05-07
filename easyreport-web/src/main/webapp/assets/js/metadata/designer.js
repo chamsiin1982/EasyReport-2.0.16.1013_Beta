@@ -130,7 +130,7 @@ var DesignerMVC = {
             text: "统计列",
             value: 3
         }, {
-            text: "计算列",
+            text: "表达式列",
             value: 4
         }],
         MetaColumnSortTypes: [{
@@ -1436,12 +1436,12 @@ var DesignerMVC = {
                     newColumns[i] = oldRowMap[name];
                 }
             }
-
-            $.each(oldColumns, function (i, column) {
-                if (column.type == 4) {
-                    newColumns.push(column);
-                }
-            });
+            //为什么要对计算列 特殊处理一次？
+           // $.each(oldColumns, function (i, column) {
+           //     if (column.type == 4) {
+           //         newColumns.push(column);
+           //     }
+           // });
             return $("#report-meta-column-grid").datagrid('loadData', newColumns);
         },
         getMetaColumns: function (columns) {

@@ -32,7 +32,7 @@ public class VerticalStatColumnReportBuilder extends AbstractReportBuilder imple
         ColumnTree leftFixedColumnTree = this.reportDataSet.getBodyLeftFixedColumnTree();
         List<ColumnTreeNode> rowNodes = leftFixedColumnTree.getLastLevelNodes();
         List<ColumnTreeNode> columnNodes = this.reportDataSet.getBodyRightColumnNodes();
-        Map<String, ReportDataRow> statRowMap = reportDataSet.getRowMap();
+        Map<String, ReportDataRow> statRowMap = reportDataSet.getRowMap(this.reportParameter.getParamMap());
         Map<String, ColumnTreeNode> treeNodePathMap = this.getTreeNodePathMap(leftFixedColumnTree);
         String defaultColumName = this.reportDataSet.getEnabledStatColumns().get(0).getName();
         boolean isHideStatColumn = this.reportDataSet.isHideStatColumn();

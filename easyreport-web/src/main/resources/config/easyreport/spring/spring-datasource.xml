@@ -9,9 +9,12 @@
     <!-- 报表元数据存储的数据源 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/easyreport2?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <!-- <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/easyreport2?useUnicode=true&amp;characterEncoding=UTF-8"/>
         <property name="user" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="root"/> -->
+        <property name="jdbcUrl" value="jdbc:mysql://132.228.219.69:3306/easyreport2?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root1234!"/> 
         <property name="minPoolSize" value="1"/>
         <property name="maxPoolSize" value="300"/>
         <property name="maxIdleTime" value="1800"/>

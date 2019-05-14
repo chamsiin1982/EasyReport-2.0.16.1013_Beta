@@ -60,8 +60,11 @@ public class ChartReportService implements IChartReportService {
     }
 
     @Override
+    /**
+     * to-do: reportDataSet.getRowMap(null); 还是要传参数的
+     */
     public Map<String, JSONObject> getDataRows(ReportDataSet reportDataSet) {
-        Map<String, ReportDataRow> dataRows = reportDataSet.getRowMap();
+        Map<String, ReportDataRow> dataRows = reportDataSet.getRowMap(null);
         List<ReportDataColumn> statColumns = reportDataSet.getStatColumns();
         Map<String, JSONObject> rowMap = new HashMap<>(dataRows.size());
 

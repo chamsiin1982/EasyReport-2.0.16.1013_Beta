@@ -94,7 +94,7 @@ public class ReportHelper {
         
         //
         HtmlFormElement statColumnFormElements = tableReportService.getStatColumnFormElements(metaDataColumns, 0);
-        
+        System.out.println("statColumHtmlText:"+ formView.getFormHtmlText(statColumnFormElements));;
         //
         List<HtmlFormElement> nonStatColumnFormElements = tableReportService.getNonStatColumnFormElements(metaDataColumns);
         modelAndView.addObject("uid", uid);
@@ -114,6 +114,13 @@ public class ReportHelper {
         generate(uid, data, new HashMap<>(0), parameters);
     }
 
+    /**
+     * 
+     * @param uid       报表ID
+     * @param data      json对象
+     * @param attachParams  内置的参数
+     * @param parameters http请求的form表单
+     */
     public static void generate(String uid, JSONObject data, Map<String, Object> attachParams, Map<?, ?> parameters) {
         if (StringUtils.isBlank(uid)) {
             data.put("htmlTable", "uid参数为空导致数据不能加载！");
@@ -145,8 +152,8 @@ public class ReportHelper {
     /***
      * 对多参数，非代码内替换型SQL，判断 参数是否为空值，如果非空值进行参数附加
      * @param uid
-     * @param attachParams
-     * @param parameters
+     * @param attachParams 并未使用
+     * @param parameters   从request获取的请求参数
      * @return
      */
     public static ReportTable generate(String uid, Map<String, Object> attachParams, Map<?, ?> parameters) {
@@ -155,9 +162,8 @@ public class ReportHelper {
         ReportOptions options = reportService.parseOptions(report.getOptions());
         
         //表单构建
-        Map<String, Object> formParams = tableReportService.getFormParameters(parameters, options.getDataRange());
-        
-        //where query
+        Map<String, Object> formParams = tableReportService.getFormParameters(parameters, options.getDataRange());        
+        //where query,后调整添加
         Map<String, Object> queryParamsMap = tableReportService.getQueryAppendParameters(parameters, options.getDataRange());
         
         if (MapUtils.isNotEmpty(attachParams)) {

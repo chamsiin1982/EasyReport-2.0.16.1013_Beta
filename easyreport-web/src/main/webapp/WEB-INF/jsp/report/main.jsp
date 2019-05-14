@@ -18,7 +18,7 @@
 <div region="center" style="border-top-width: 0">
     <div id="report-main-tabs" class="easyui-tabs" border="false" fit="true">
         <div title="表格" data-options="iconCls:'icon-table'"></div>
-        <div title="图表" data-options="iconCls:'icon-chart4'"></div>
+       <!-- <div title="图表" data-options="iconCls:'icon-chart4'"></div> --> 
         <input id="report-main-uid" type="hidden" name="uid" value="${report.uid}"/>
     </div>
 </div>

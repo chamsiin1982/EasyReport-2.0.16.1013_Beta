@@ -3,6 +3,8 @@ package com.easytoolsoft.easyreport.engine.data;
 import com.easytoolsoft.easyreport.engine.exception.NotFoundLayoutColumnException;
 import com.easytoolsoft.easyreport.engine.util.AviatorExprUtils;
 import com.easytoolsoft.easyreport.engine.util.ComparatorUtils;
+
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
@@ -328,17 +330,26 @@ public abstract class ReportDataSet {
      *
      * @return Map<String, ReportDataRow>
      */
-    public Map<String, ReportDataRow> getRowMap() {
+    public Map<String, ReportDataRow> getRowMap(Map<String,Object> paramMap) {
         Map<String, ReportDataRow> dataRowMap = new HashMap<>();
         List<ReportDataColumn> statColumns = this.getStatColumns();
         List<ReportDataColumn> computedColumns = this.getComputedColumns();
         List<ReportDataColumn> nonStatColumns = this.getNonStatColumns();
         List<ReportMetaDataRow> metaDataRows = this.metaDataSet.getRows();
+        
+        //添加requestParamMap 添加至 exprContext上下文 
 
         for (ReportMetaDataRow metaDataRow : metaDataRows) {
             String key = this.getDataRowMapKey(metaDataRow, nonStatColumns);
             ReportDataRow dataRow = new ReportDataRow();
             Map<String, Object> exprContext = new HashMap<>();
+            
+           if(! MapUtils.isEmpty(paramMap)) {
+        	   for(Map.Entry<String, Object> param : paramMap.entrySet()) {
+        		   exprContext.put("param"+param.getKey(),param.getValue());
+        	   }
+           }
+            
             for (ReportDataColumn statColumn : statColumns) {
                 Object value = metaDataRow.getCellValue(statColumn.getName());
                 dataRow.add(new ReportDataCell(statColumn, statColumn.getName(), value));

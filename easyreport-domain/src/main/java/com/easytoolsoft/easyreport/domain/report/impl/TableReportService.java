@@ -117,9 +117,16 @@ public class TableReportService implements ITableReportService {
         List<ReportMetaDataColumn> metaColumns = this.reportService.parseMetaColumns(report.getMetaColumns());
         return new ReportParameter(report.getId().toString(), report.getName(),
                 options.getLayout(), options.getStatColumnLayout(), metaColumns,
-                enabledStatColumn, Boolean.valueOf(formParams.get("isRowSpan").toString()), sqlText);
+                enabledStatColumn, Boolean.valueOf(formParams.get("isRowSpan").toString()), sqlText,formParams);
     }
 
+    /**
+     * 利用JsqlParser对SQL 进行append方式，未测试 复杂的嵌套SQL
+     * @param sqlText
+     * @param appendParams
+     * @return
+     * @throws Exception
+     */
     private String sqlTextAppend(String sqlText,Map<String, Object> appendParams) throws Exception{
     	String sql=sqlText;
     	if(null != appendParams && MapUtils.isNotEmpty(appendParams)){
@@ -238,7 +245,7 @@ public class TableReportService implements ITableReportService {
     }
 
     /***
-     * 对附加参数进行处理  加一个map 保存append参数  to-do
+          * 对附加参数进行处理  加一个map 保存append参数  to-do
      * @param formParams
      * @param httpReqParamMap
      */
@@ -577,6 +584,7 @@ public class TableReportService implements ITableReportService {
         List<ReportMetaDataColumn> statColumns = columns.stream()
                 .filter(column -> column.getType() == ColumnType.STATISTICAL ||
                         column.getType() == ColumnType.COMPUTED)
+                .filter(column-> column.isHidden() == false)
                 .collect(Collectors.toList());
         if (statColumns.size() <= minDisplayedStatColumn) {
             return null;

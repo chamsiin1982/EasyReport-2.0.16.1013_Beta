@@ -2,6 +2,7 @@ package com.easytoolsoft.easyreport.engine.data;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,6 +17,7 @@ public class ReportParameter {
     private List<ReportMetaDataColumn> metaColumns;
     private Set<String> enabledStatColumns;
     private boolean isRowSpan = true;
+    private Map<String,Object> paramMap;
 
     public ReportParameter() {
     }
@@ -44,6 +46,14 @@ public class ReportParameter {
         this.isRowSpan = isRowSpan;
         this.sqlText = sqlText;
     }
+    
+    public ReportParameter(String id, String name, int layout, int statColumnLayout,
+            List<ReportMetaDataColumn> metaColumns, Set<String> enabledStatColumns,
+            boolean isRowSpan, String sqlText, Map<String, Object> paramMap) {
+    		this(id,name,layout,statColumnLayout,metaColumns,enabledStatColumns,isRowSpan,sqlText);
+    		this.paramMap=paramMap;
+    }
+    
 
     /**
      * 获取报表唯一id
@@ -190,4 +200,15 @@ public class ReportParameter {
     public void setRowSpan(boolean isRowSpan) {
         this.isRowSpan = isRowSpan;
     }
+
+	public Map<String, Object> getParamMap() {
+		return paramMap;
+	}
+
+	public void setParamMap(Map<String, Object> paramMap) {
+		this.paramMap = paramMap;
+	}
+    
+    
+    
 }

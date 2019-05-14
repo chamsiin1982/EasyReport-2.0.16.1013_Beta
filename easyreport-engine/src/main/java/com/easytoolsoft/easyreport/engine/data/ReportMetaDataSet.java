@@ -30,6 +30,8 @@ public class ReportMetaDataSet {
         this.initilizeColumn(enabledStatColumns);
     }
 
+    
+    
     /**
      * 获取报表的元数据行集合
      *

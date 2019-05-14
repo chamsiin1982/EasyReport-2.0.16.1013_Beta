@@ -90,6 +90,10 @@ var DesignerMVC = {
             name: "optional",
             text: "可选",
             type: 1
+        },{
+            name: "hidden",
+            text: "隐藏",
+            type: 5
         }, {
             name: "percent",
             text: "百分比",
@@ -480,11 +484,11 @@ var DesignerMVC = {
                         // 4:计算列,3:统计列,2:维度列,1:布局列
                         if (row.type == 4) {
                             subOptions = $.grep(DesignerMVC.Model.MetaColumnOptions, function (option, i) {
-                                return option.type == 1 || option.type == 2 || option.type == 4;
+                                return option.type == 1 || option.type == 2 || option.type == 4 ;
                             });
                         } else if (row.type == 3) {
                             subOptions = $.grep(DesignerMVC.Model.MetaColumnOptions, function (option, i) {
-                                return option.type == 1 || option.type == 2;
+                                return option.type == 1 || option.type == 2|| option.type == 5;
                             });
                         } else {
                             subOptions = $.grep(DesignerMVC.Model.MetaColumnOptions, function (option, i) {
@@ -493,7 +497,8 @@ var DesignerMVC = {
                         }
 
                         var htmlOptions = [];
-                        for (var i = 0; i < subOptions.length; i++) {
+                        for (var i = 0; i < subOptions.length; i++) {                       
+                        	
                             var name = subOptions[i].name;
                             var data = {
                                 id: name + index,
@@ -1479,7 +1484,7 @@ var DesignerMVC = {
                 });
             } else if (type == 3) {
                 subOptions = $.grep(DesignerMVC.Model.MetaColumnOptions, function (option, i) {
-                    return option.type == 1 || option.type == 2;
+                    return option.type == 1 || option.type == 2 ||option.type == 5;
                 });
             } else {
                 subOptions = $.grep(DesignerMVC.Model.MetaColumnOptions, function (option, i) {

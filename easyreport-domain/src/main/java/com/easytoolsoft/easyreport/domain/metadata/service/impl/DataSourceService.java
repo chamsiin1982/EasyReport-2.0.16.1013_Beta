@@ -7,6 +7,7 @@ import com.easytoolsoft.easyreport.data.metadata.po.DataSource;
 import com.easytoolsoft.easyreport.domain.metadata.service.IDataSourceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,10 +36,15 @@ public class DataSourceService
         Connection conn = null;
         try {
         	//this.getClass().getClassLoader().loadClass("oracle.jdbc.driver.OracleDriver");//
-        	Class.forName("oracle.jdbc.driver.OracleDriver");
+        	Class.forName("org.elasticsearch.xpack.sql.jdbc.jdbc.JdbcDriver");
         	//DriverManager.registerDriver(Class.forName("oracle.jdbc.driver.OracleDriver"));
-        	conn = DriverManager.getConnection(url, user, password);
-            
+        	if(StringUtils.isEmpty(user)){
+        			conn =DriverManager.getConnection(url);
+        	}
+        	else{
+        		conn = DriverManager.getConnection(url, user, password);
+        	}
+        	
             return true;
         } catch (Exception e) {
             log.error("testConnection", e);

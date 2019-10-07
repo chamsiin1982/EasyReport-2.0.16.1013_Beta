@@ -1,5 +1,7 @@
 package com.easytoolsoft.easyreport.engine.data;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.easytoolsoft.easyreport.engine.util.NumberFormatUtils;
 
 public class ReportDataCell {
@@ -42,6 +44,10 @@ public class ReportDataCell {
             decimals = decimals <= 0 ? 4 : decimals;
             return NumberFormatUtils.decimalFormat(value, decimals);
         }
-        return NumberFormatUtils.format(this.value);
+        if (this.column.getMetaData().getDataType().equals("VARCHAR")) {
+        	return null==value?"": value.toString();
+        }
+        //return NumberFormatUtils.format(this.value);
+        return null==value?"": value.toString();
     }
 }

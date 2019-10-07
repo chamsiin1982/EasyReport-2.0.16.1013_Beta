@@ -36,13 +36,13 @@
                 <tr>
                     <td>用户:</td>
                     <td><input class="easyui-textbox" type="text" id="user" name="user"
-                               data-options="required:true"
+                              
                                style="width: 180px"/></td>
                     <td>密码:</td>
                     <td><input class="easyui-textbox" type="password" id="password" name="password"
-                               data-options="required:true"
+                               
                                style="width: 180px"/></td>
-                </tr>
+                </tr><!--  data-options="required:true" -->
                 <tr>
                     <td>数据源:</td>
                     <td>

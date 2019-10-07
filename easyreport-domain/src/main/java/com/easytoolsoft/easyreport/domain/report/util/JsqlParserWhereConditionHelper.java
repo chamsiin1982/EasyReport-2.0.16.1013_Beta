@@ -120,6 +120,12 @@ public class JsqlParserWhereConditionHelper {
     private static LikeExpression likeExpression(Expression left, Expression right) {
     	LikeExpression like = new LikeExpression();
     	like.setLeftExpression(left);
+//		if(! (right.toString().indexOf('%')>0)) {
+//				String temp="%"+right.toString()+"%";
+//				like.setRightExpression(new StringValue( temp));
+//		}else{
+//				like.setRightExpression(right);
+//		}
     	like.setRightExpression(right);
     	//like.setCaseInsensitive(true);
         return like;

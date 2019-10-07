@@ -22,7 +22,7 @@ public class JdbcUtils {
 
     public static DataSource getDataSource(ReportDataSource rptDs) {
         //用数据源用户名,密码,jdbcUrl做为key
-        String key = String.format("%s|%s|%s", rptDs.getUser(), rptDs.getPassword(), rptDs.getJdbcUrl()).toLowerCase();
+        String key = String.format("%s|%s|%s",  rptDs.getJdbcUrl(),rptDs.getUser(), rptDs.getPassword()).toLowerCase();
         DataSource dataSource = dataSourceMap.get(key);
         if (dataSource == null) {
             dataSource = DataSourcePoolFactory.create(rptDs.getDbPoolClass()).wrap(rptDs);

@@ -21,6 +21,7 @@ public class ReportMetaDataColumn {
     private boolean isOptional;
     private boolean isDisplayInMail;
     private boolean isHidden;
+    private boolean caseSentitive=false;
 
     public ReportMetaDataColumn() {
     }
@@ -55,7 +56,11 @@ public class ReportMetaDataColumn {
      * @return 元数据列名
      */
     public String getName() {
-        return this.name == null ? "" : this.name.trim().toLowerCase();
+    	
+    	if(caseSentitive==true)
+    		return this.name == null ? "" : this.name.trim();
+    	else
+    		return this.name == null ? "" : this.name.trim().toLowerCase();
     }
 
     /**
@@ -329,7 +334,15 @@ public class ReportMetaDataColumn {
         return this.comment == null ? "" : this.comment;
     }
 
-    /**
+    public boolean isCaseSentitive() {
+		return caseSentitive;
+	}
+
+	public void setCaseSentitive(boolean caseSentitive) {
+		this.caseSentitive = caseSentitive;
+	}
+
+	/**
      * 设置元数据列备注
      *
      * @param comment

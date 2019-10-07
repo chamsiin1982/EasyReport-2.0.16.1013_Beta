@@ -35,7 +35,7 @@ public class DruidDataSourcePool implements DataSourcePoolWrapper {
             dataSource.setLogAbandoned(MapUtils.getBoolean(rptDs.getOptions(), "logAbandoned", true));
             return dataSource;
         } catch (Exception ex) {
-            throw new RuntimeException("C3p0DataSourcePool Create Error", ex);
+            throw new RuntimeException("DruidDataSourcePool Create Error", ex);
         }
     }
 }

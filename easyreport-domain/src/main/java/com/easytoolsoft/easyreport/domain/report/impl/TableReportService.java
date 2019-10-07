@@ -52,7 +52,6 @@ public class TableReportService implements ITableReportService {
     @Resource
     private IReportService reportService;
 
-    @Override
     public ReportParameter getReportParameter(Report report, Map<?, ?> parameters) {
         ReportOptions options = this.reportService.parseOptions(report.getOptions());
         Map<String, Object> formParams = this.getFormParameters(parameters, options.getDataRange());
@@ -132,7 +131,7 @@ public class TableReportService implements ITableReportService {
     	if(null != appendParams && MapUtils.isNotEmpty(appendParams)){
     		for(Object param: appendParams.values()){
     			QueryParameter qp=(QueryParameter)param;
-    			if(qp.getValue().equals("全部")){
+    			if(qp.getValue().equals("全部")||qp.getValue().equals("不限制")||StringUtils.isEmpty(qp.getValue().trim())){
     				continue;
     			}
     			String columnName=qp.getColumnName();
@@ -140,6 +139,12 @@ public class TableReportService implements ITableReportService {
     			String andor=qp.getIsAndOr();
     			String paramValue=qp.getValue();
     			String dataType=qp.getDataType();
+    			
+    			//JSQLparse like  构建通配符 未成功，先写死
+    			if(dataType.equals("string")) {
+    				paramValue=paramValue.indexOf('%')>0?paramValue: "%"+paramValue+"%";
+    			}
+    			
     			if("and".equals(andor))
     			{
     				if(dataType.equals("string")||dataType.equals("date")) {
@@ -264,7 +269,9 @@ public class TableReportService implements ITableReportService {
             if (values != null && values.length > 0) {
                 value = this.getQueryParamValue(queryParam.getDataType(), values);
             }
-            
+            /**
+             *	 改造：如果是append 类型，则执行SQL附加动作，有默认“空值参数”
+             */
             if("append".equalsIgnoreCase(queryParam.getAppendType())){
             	queryParam.setValue(value);
             	queryParamsMap.put(queryParam.getName(), queryParam);

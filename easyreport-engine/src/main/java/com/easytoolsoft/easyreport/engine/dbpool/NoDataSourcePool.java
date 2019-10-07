@@ -3,6 +3,9 @@ package com.easytoolsoft.easyreport.engine.dbpool;
 import com.easytoolsoft.easyreport.engine.data.ReportDataSource;
 
 import javax.sql.DataSource;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,10 +31,21 @@ public class NoDataSourcePool implements DataSourcePoolWrapper {
 
         @Override
         public Connection getConnection() throws SQLException {
-            return DriverManager.getConnection(
-                    this.reportDataSource.getJdbcUrl(),
-                    this.reportDataSource.getUser(),
-                    this.reportDataSource.getPassword());
+        	
+        	try {
+				Class.forName(this.reportDataSource.getDriverClass());
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+        	if(StringUtils.isEmpty(this.reportDataSource.getUser())) {
+        		 return DriverManager.getConnection(this.reportDataSource.getJdbcUrl());
+        	}else {
+	            return DriverManager.getConnection(
+	                    this.reportDataSource.getJdbcUrl(),
+	                    this.reportDataSource.getUser(),
+	                    this.reportDataSource.getPassword());
+        	}
         }
 
         @Override

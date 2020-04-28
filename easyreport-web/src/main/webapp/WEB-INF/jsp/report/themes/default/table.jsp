@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="${ctxPath}/assets/vendor/tablesorter/css/theme.dark.css?v=${version}"/>
     <link rel="stylesheet" href="${ctxPath}/assets/js/report/themes/default/default.css?v=${version}"/>
     <script src="${ctxPath}/assets/vendor/tablesorter/jquery.tablesorter.min.js?v=${version}"></script>
-    <script src="${ctxPath}/assets/vendor/jquery.fixtableheader.js/vendor/jquery.fixtableheader.js?v=${version}"></script>
+    <script src="${ctxPath}/assets/vendor/jquery.fixtableheader.js?v=${version}"></script>
+   <!--<script src="${ctxPath}/assets/vendor/jquery.fixtableheader.js/vendor/jquery.fixtableheader.js?v=${version}"></script>  --> 
     <script src="${ctxPath}/assets/js/report/themes/default/table.js?v=${version}"></script>
 </head>
 <body>

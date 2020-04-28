@@ -55,7 +55,7 @@
     </bean>
 
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
-        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('ZUdsaGJuSmxibVI2ZHc9PQ==')}"/>
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('3YXbrGDY+1xXbfv5EsnEHjAbDOH83QBRf2Bj9idTO50=')}"/>
         <property name="cookie" ref="rememberMeCookie"/>
     </bean>
 

@@ -146,6 +146,11 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>5.1.38</version>
             </dependency>
+           <dependency>
+    			<groupId>cn.easyproject</groupId>
+    			<artifactId>ojdbc7</artifactId>
+    			<version>12.1.0.2.0</version>
+			</dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>

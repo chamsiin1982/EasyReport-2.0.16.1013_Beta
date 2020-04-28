@@ -53,6 +53,27 @@ public class DataSourceService
             this.releaseConnection(conn);
         }
     }
+    public boolean testConnection(String url, String user, String password,String driverClass) {
+        Connection conn = null;
+        try {
+        	//this.getClass().getClassLoader().loadClass(driverClass);//
+        	Class.forName(driverClass);
+        	//DriverManager.registerDriver(Class.forName("oracle.jdbc.driver.OracleDriver"));
+        	if(StringUtils.isEmpty(user)){
+        			conn =DriverManager.getConnection(url);
+        	}
+        	else{
+        		conn = DriverManager.getConnection(url, user, password);
+        	}
+        	
+            return true;
+        } catch (Exception e) {
+            log.error("testConnection", e);
+            return false;
+        } finally {
+            this.releaseConnection(conn);
+        }
+    }
 
     private void releaseConnection(Connection conn) {
         if (conn != null) {

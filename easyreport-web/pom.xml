@@ -192,10 +192,14 @@
         	<groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
         </dependency>
-       <dependency>
+        <dependency>
 			  <groupId>org.elasticsearch.plugin</groupId>
 			  <artifactId>x-pack-sql-jdbc</artifactId>
         </dependency>
+         <dependency>
+    			<groupId>cn.easyproject</groupId>
+    			<artifactId>ojdbc7</artifactId>
+			</dependency>
     </dependencies>
     <profiles>
         <profile>

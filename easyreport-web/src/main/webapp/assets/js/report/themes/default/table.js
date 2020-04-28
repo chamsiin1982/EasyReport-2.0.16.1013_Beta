@@ -83,7 +83,8 @@ ReportTemplate.renderClassicReport = function(table) {
 	});
 
 	var noRowSpan = !ReportTemplate.hasRowSpan();
-	table.data('isSort', noRowSpan).fixScroll();
+	//table.data('isSort', noRowSpan).fixScroll();
+	table.data('isSort', noRowSpan).fixScroll();//.fixTableHeader();
 	
 	//如果表格中没有跨行rowspan(暂不支持跨行)
 	if (noRowSpan) {

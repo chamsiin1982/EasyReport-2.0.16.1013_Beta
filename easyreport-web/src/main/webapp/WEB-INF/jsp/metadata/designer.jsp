@@ -414,6 +414,7 @@
 <!-- tree右键菜单  -->
 <div id="category-tree-ctx-menu" class="easyui-menu" style="width: 150px;">
     <div id="m-add-cate" data-options="name:'addCate',iconCls:'icon-category'">新增分类</div>
+     <%  if(!"24".equals(userRoles)){ %>
     <div id="m-add-report" data-options="name:'addReport',iconCls:'icon-report'">新增报表</div>
     <div class="menu-sep"></div>
     <div id="m-copy" data-options="name:'copy',iconCls:'icon-copy'">复制</div>
@@ -423,11 +424,13 @@
     <div id="m-search" data-options="name:'search',iconCls:'icon-search'">查找</div>
     <div class="menu-sep"></div>
     <div id="m-refresh" data-options="name:'refresh',iconCls:'icon-reload'">刷新</div>
+     <%} %>
 </div>
 <!-- 报表列表右键菜单  -->
 <div id="report-datagrid-ctx-menu" class="easyui-menu" style="width: 150px;">
     <div id="rp-preview" data-options="name:'preview',iconCls:'icon-preview'">预览</div>
     <div id="rp-window" data-options="name:'window',iconCls:'icon-window'">在新窗口预览...</div>
+    <%  if(!"24".equals(userRoles)){ %>
     <div class="menu-sep"></div>
     <div id="rp-add" data-options="name:'add',iconCls:'icon-add'">增加</div>
     <div id="rp-edit" data-options="name:'edit',iconCls:'icon-edit1'">修改</div>
@@ -437,6 +440,7 @@
     <div id="rp-history" data-options="name:'history',iconCls:'icon-history'">版本</div>
     <div id="rp-info" data-options="name:'info',iconCls:'icon-info'">详细</div>
     <div id="rp-refresh" data-options="name:'refresh',iconCls:'icon-reload'">刷新</div>
+    <%} %>
 </div>
 </body>
 </html>

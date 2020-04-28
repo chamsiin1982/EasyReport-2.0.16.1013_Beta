@@ -20,4 +20,6 @@ public interface IDataSourceService extends ICrudService<DataSource, DataSourceE
      * @param password
      */
     boolean testConnection(String url, String user, String password);
+    
+    boolean testConnection(String url, String user, String password,String driverClass);
 }

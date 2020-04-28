@@ -303,7 +303,8 @@ var DsMVC = {
             var data = {
                 url: $("#jdbcUrl").val(),
                 pass: $("#password").val(),
-                user: $("#user").val()
+                user: $("#user").val(),
+                driverClass: $("#driverClass").val()
             };
             EasyReport.utils.debug(data);
 

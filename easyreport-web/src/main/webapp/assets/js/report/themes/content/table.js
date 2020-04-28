@@ -8,7 +8,8 @@ var TableReport = {
         if( $("input.extend_treecombo").length>0 ){
  		   
         	$.each( $("input.extend_treecombo"), function(i,valueHidden){
-        		var treeId= valueHidden.id.split('_')[0];
+        		//var treeId= valueHidden.id.split('_')[0];
+        		var treeId= valueHidden.id.replace("_treecombo","");
         		$('#'+treeId).combotree('loadData',jQuery.parseJSON(valueHidden.value ) );
         	});
         }

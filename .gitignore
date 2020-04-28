@@ -29,6 +29,11 @@ nb-configuration.xml
 /easyreport-membership/target/
 /easyreport-membership/.settings/
 /easyreport-membership/.classpath
+/easyreport-data/.factorypath
+/easyreport-domain/.factorypath
+/easyreport-membership/.factorypath
+/easyreport-scheduler/.factorypath
+/easyreport-web/.factorypath
 .project
 .classpath
 .settings

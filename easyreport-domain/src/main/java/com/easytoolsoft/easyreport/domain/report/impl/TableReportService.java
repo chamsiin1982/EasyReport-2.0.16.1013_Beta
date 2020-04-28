@@ -25,6 +25,7 @@ import com.easytoolsoft.easyreport.data.metadata.po.Report;
 import com.easytoolsoft.easyreport.data.metadata.po.ReportOptions;
 import com.easytoolsoft.easyreport.domain.report.ITableReportService;
 import com.easytoolsoft.easyreport.domain.report.util.JsqlParserWhereConditionHelper;
+import com.easytoolsoft.easyreport.domain.report.util.WhereConditionOperator;
 import com.easytoolsoft.easyreport.domain.metadata.service.IReportService;
 import com.easytoolsoft.easyreport.domain.metadata.vo.QueryParameter;
 
@@ -141,7 +142,7 @@ public class TableReportService implements ITableReportService {
     			String dataType=qp.getDataType();
     			
     			//JSQLparse like  构建通配符 未成功，先写死
-    			if(dataType.equals("string")) {
+    			if(dataType.equals("string") && operator.equals(WhereConditionOperator.LIKE)) {
     				paramValue=paramValue.indexOf('%')>0?paramValue: "%"+paramValue+"%";
     			}
     			

@@ -22,7 +22,9 @@
       String userRoles= request.getSession().getAttribute("userRoles").toString();    	
      if("24".equals(userRoles)){
     %>
-    <script src="${ctxPath}/assets/js/metadata/designer_less.js?v=${version}"></script>
+     <script src="${ctxPath}/assets/js/metadata/designer_less.js?v=${version}"></script>
+    <!-- <script src="${ctxPath}/assets/js/metadata/designer.js?v=${version}"></script>-->
+    
     <%
       }else{
     %>
@@ -253,10 +255,10 @@
                             <td><input class="easyui-textbox" type="text" id="report-query-param-width" name="width"
                                        value="100" data-options="validType:'digit'" style="width:150px"/></td>
                             <td>是否必选:</td>
-                            <td><input class="easyui-textbox" type="checkbox" id="report-query-param-required"
+                            <td><input class="easyui-checkbox" type="checkbox" id="report-query-param-required"
                                        name="required"/></td>
                             <td>是否自动提示:</td>
-                            <td><input type="checkbox" id="report-query-param-autoComplete" name="autoComplete"/></td>
+                            <td><input class="easyui-checkbox" type="checkbox" id="report-query-param-autoComplete" name="autoComplete"/></td>
                         </tr>
                         <tr>
                             <td>表单控件:</td>
@@ -284,6 +286,12 @@
                             <td>
                             	<input class="easyui-textbox" type="text" id="report-query-param-treeRootValue" name="treeRootValue"
                                         style="width:150px"/>
+                            </td>
+                            <td>
+                            	是否隐藏
+                            </td>
+                            <td>
+                            	<input class="easyui-checkbox" type="checkbox" id="report-query-param-needHidden"    name="needHidden" />
                             </td>
                         </tr>                                             
                         <tr>

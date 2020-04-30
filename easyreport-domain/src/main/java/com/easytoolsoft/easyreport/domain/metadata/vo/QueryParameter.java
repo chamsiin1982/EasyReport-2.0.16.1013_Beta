@@ -33,9 +33,17 @@ public class QueryParameter implements Serializable {
     private String operator="";
     
     private String treeRootValue="";
+    private boolean isNeedHidden=false;
     
-    
-    public String getTreeRootValue() {
+    public boolean isNeedHidden() {
+		return isNeedHidden;
+	}
+
+	public void setNeedHidden(boolean isNeedHidden) {
+		this.isNeedHidden = isNeedHidden;
+	}
+
+	public String getTreeRootValue() {
 		return treeRootValue;
 	}
 

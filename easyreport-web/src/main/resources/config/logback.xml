@@ -24,7 +24,7 @@
             <charset>${easyreport.log.charset.file}</charset>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>WARN</level>
+            <level>ERROR</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${easyreport.log.file.err.history}</fileNamePattern>

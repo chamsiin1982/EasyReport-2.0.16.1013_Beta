@@ -12,10 +12,23 @@ public abstract class HtmlFormElement {
     private String defaultText;
     private String defaultValue;
     
+    //添加控件隐藏配置项
+    private boolean isNeedHidden;
+    
     //添加树 根节点值
     private String treeRootValue=null;
 
-    public String getTreeRootValue() {
+    
+    
+    public boolean isNeedHidden() {
+		return isNeedHidden;
+	}
+
+	public void setNeedHidden(boolean isNeedHidden) {
+		this.isNeedHidden = isNeedHidden;
+	}
+
+	public String getTreeRootValue() {
 		return treeRootValue;
 	}
 

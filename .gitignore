@@ -40,3 +40,11 @@ nb-configuration.xml
 */logs/
 .idea
 *.iml
+easyreport-data/.factorypath
+easyreport-data/.factorypath
+easyreport-data/.factorypath
+easyreport-domain/.factorypath
+easyreport-membership/.factorypath
+easyreport-scheduler/.factorypath
+easyreport-web/.factorypath
+easyreport-data/.factorypath

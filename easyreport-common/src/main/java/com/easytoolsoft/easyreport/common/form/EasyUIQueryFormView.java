@@ -21,28 +21,47 @@ public class EasyUIQueryFormView extends AbstractQueryParamFormView implements Q
     protected String getDateBoxText(HtmlDateBox dateBox) {
         String template = "<input id=\"%s\" name=\"%s\" type=\"text\" class=\"easyui-datebox\" required=\"true\" value=\"%s\" />";
         String easyuiText = String.format(template, dateBox.getName(), dateBox.getName(), dateBox.getValue());
-        return String.format("<span class=\"j-item\"><label style=\"width: 120px;\">%s:</label>%s</span>", dateBox.getText(), easyuiText);
+        return 
+        		dateBox.isNeedHidden()==true?        		
+        		String.format("<span class=\"j-item\" style=\"display:none;\" ><label style=\"width: 120px;\">%s:</label>%s</span>", dateBox.getText(), easyuiText)
+        		: String.format("<span class=\"j-item\"  ><label style=\"width: 120px;\">%s:</label>%s</span>", dateBox.getText(), easyuiText)
+        		;
     }
 
     @Override
     protected String getTexBoxText(HtmlTextBox textBox) {
         String template = "<input id=\"%s\" name=\"%s\" type=\"text\" value=\"%s\" />";
         String easyuiText = String.format(template, textBox.getName(), textBox.getName(), textBox.getValue());
-        return String.format("<span class=\"j-item\"><label style=\"width: 120px;\">%s:</label>%s</span>", textBox.getText(), easyuiText);
+        return 
+        		textBox.isNeedHidden()==true?    
+        		String.format("<span class=\"j-item\" style=\"display:none;\" ><label style=\"width: 120px;\">%s:</label>%s</span>", textBox.getText(), easyuiText)
+        		:String.format("<span class=\"j-item\"><label style=\"width: 120px;\">%s:</label>%s</span>", textBox.getText(), easyuiText)
+        		;
     }
 
     @Override
     protected String getCheckBoxText(HtmlCheckBox checkBox) {
         String checked = checkBox.isChecked() ? "" : "checked=\"checked\"";
-        return String.format("<input id=\"%s\" name=\"%s\" type=\"checkbox\" value=\"%s\" %s />%s",
-                checkBox.getName(), checkBox.getName(), checkBox.getValue(), checked, checkBox.getText());
+        return 
+        		checkBox.isNeedHidden()==true?    
+        		String.format("<input id=\"%s\" style=\"display:none;\" name=\"%s\" type=\"checkbox\" value=\"%s\" %s />%s",
+                checkBox.getName(), checkBox.getName(), checkBox.getValue(), checked, checkBox.getText())
+        		: String.format("<input id=\"%s\" name=\"%s\" type=\"checkbox\" value=\"%s\" %s />%s",
+                        checkBox.getName(), checkBox.getName(), checkBox.getValue(), checked, checkBox.getText())
+        		;
     }
 
     @Override
     protected String getComboBoxText(HtmlComboBox comboBox) {
         String multiple = comboBox.isMultipled() ? "data-options=\"multiple:true\"" : "";
         StringBuilder htmlText = new StringBuilder("");
-        htmlText.append(String.format("<span class=\"j-item\"><label style=\"width: 120px;\">%s:</label>", comboBox.getText()));
+        
+        if(comboBox.isNeedHidden()==true){
+        	htmlText.append(String.format("<span class=\"j-item\" style=\"display:none;\"><label style=\"width: 120px;\">%s:</label>", comboBox.getText()));
+        } else {
+        	htmlText.append(String.format("<span class=\"j-item\"><label style=\"width: 120px;\">%s:</label>", comboBox.getText()));
+        }
+        
         htmlText.append(String.format("<select id=\"%s\" name=\"%s\" class=\"easyui-combobox\" style=\"width: 200px;\" %s>",
                 comboBox.getName(), comboBox.getName(), multiple));
         for (HtmlSelectOption option : comboBox.getValue()) {
@@ -58,8 +77,15 @@ public class EasyUIQueryFormView extends AbstractQueryParamFormView implements Q
     protected String getCheckboxListText(HtmlCheckBoxList checkBoxList) {
         boolean isCheckedAll = true;
         StringBuilder htmlText = new StringBuilder("");
-        htmlText.append(String.format("<span class=\"j-item\" data-type=\"checkbox\"><label style=\"width: 120px;\">%s:</label>",
+        
+        if(checkBoxList.isNeedHidden()==true){
+        	htmlText.append(String.format("<span class=\"j-item\" style=\"display:none;\" data-type=\"checkbox\"><label style=\"width: 120px;\">%s:</label>",
                 checkBoxList.getText()));
+        }else {
+        	htmlText.append(String.format("<span class=\"j-item\" data-type=\"checkbox\"><label style=\"width: 120px;\">%s:</label>",
+                    checkBoxList.getText()));
+        }
+        
         for (HtmlCheckBox checkBox : checkBoxList.getValue()) {
             if (!checkBox.isChecked())
                 isCheckedAll = false;
@@ -82,7 +108,14 @@ public class EasyUIQueryFormView extends AbstractQueryParamFormView implements Q
         
 		String multiple = treeComboBox.isMultipled() ? "data-options=\"multiple:true\"" : "";
         StringBuilder htmlText = new StringBuilder("");
-        htmlText.append(String.format("<span class=\"j-item\"><label style=\"width: 120px;\">%s:</label>", treeComboBox.getText()));
+        
+        
+        if(treeComboBox.isNeedHidden()==true){
+        	htmlText.append(String.format("<span class=\"j-item\" style=\"display:none;\"><label style=\"width: 120px;\">%s:</label>", treeComboBox.getText()));
+        }else {
+        	htmlText.append(String.format("<span class=\"j-item\"><label style=\"width: 120px;\">%s:</label>", treeComboBox.getText()));
+        }
+        
         htmlText.append(String.format("<select id=\"%s\" name=\"%s\" class=\"easyui-combotree\" style=\"width: 200px;\" %s>",
         		treeComboBox.getName(), treeComboBox.getName(), multiple));
         /*for (HtmlSelectOption option : treeComboBox.getValue()) {

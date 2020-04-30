@@ -592,6 +592,11 @@ var DesignerMVC = {
                     title: '是否自动提示',
                     width: 80
                 }, {
+                    field: 'needHidden',
+                    title: '是否隐藏',
+                    width: 80
+                },
+                {
                     field: 'options',
                     title: '操作',
                     width: 50,
@@ -608,8 +613,10 @@ var DesignerMVC = {
                 }]],
                 onDblClickRow: function (index, row) {
                     $('#report-query-param-form').form('load', row);
+                    
                     $("#report-query-param-required").prop("checked", row.required);
                     $("#report-query-param-autoComplete").prop("checked", row.autoComplete);
+                    $("#report-query-param-needHidden").prop("checked", row.needHidden);
                     $("#report-query-param-gridIndex").val(index);
                 }
             });
@@ -1219,9 +1226,18 @@ var DesignerMVC = {
                     return $.messager.alert('提示', "内容不能为空", 'error');
                 }
 
+                //树形控件必须设置根节点值
+                if($.trim(row.treeRootValue).length==0 && (row.formElement=='selectTree'||row.formElement=='selectTreeMul')){
+                	 $("#report-query-param-treeRootValue").focus();
+                     return $.messager.alert('提示', "树形控件根节点不能为空", 'error');
+                }
+                
+                
                 row.required = $("#report-query-param-required").prop("checked");
-                row.autoComplete = $("#report-query-param-required").prop("checked");
-
+                row.autoComplete = $("#report-query-param-autoComplete").prop("checked");
+                row.needHidden = $("#report-query-param-needHidden").prop("checked");
+                
+                
                 if (act == "add") {
                     $('#report-query-param-grid').datagrid('appendRow', row);
                 } else if (act == "edit") {
@@ -1524,6 +1540,7 @@ var DesignerMVC = {
             return typeMap;
         },
         loadQueryParams: function (params) {
+        	 $('#report-query-param-form').form('reset');
             EasyUIUtils.clearDatagrid('#report-query-param-grid');
             var jsonText = JSON.stringify(params);
             if (params instanceof Array) {

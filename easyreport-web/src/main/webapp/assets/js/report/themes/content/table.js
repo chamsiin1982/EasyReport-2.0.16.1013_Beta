@@ -72,7 +72,9 @@ var TableReportMVC = {
 	        				 break;
 	        			  //checkbox \checkboxlist\datebox\textbox
 	        			 };
-	        			     			    					        			        			      			 
+	        			 if($('#'+key).val()!=value[0]){
+	        				 $('#'+key).val(value[0]);
+	        			 }    			    					        			        			      			 
 	        		 });
 	        	 }
         	}

@@ -464,6 +464,7 @@ public class TableReportService implements ITableReportService {
         HtmlComboBox htmlComboBox = new HtmlComboBox(queryParam.getName(), queryParam.getText(), htmlSelectOptions);
         htmlComboBox.setMultipled(queryParam.getFormElement().equals("selectMul"));
         htmlComboBox.setAutoComplete(queryParam.isAutoComplete());
+    	htmlComboBox.setNeedHidden(queryParam.isNeedHidden());
         return htmlComboBox;
     }
 
@@ -497,6 +498,7 @@ public class TableReportService implements ITableReportService {
 			htmlComboBox.setTreeRootValue(queryParam.getTreeRootValue());
 			htmlComboBox.setMultipled(queryParam.getFormElement().equals("selectMul"));
 			htmlComboBox.setAutoComplete(queryParam.isAutoComplete());
+			htmlComboBox.setNeedHidden(queryParam.isNeedHidden());
 			return htmlComboBox;
     	}
     
@@ -508,6 +510,7 @@ public class TableReportService implements ITableReportService {
         htmlFormElement.setDefaultText(queryParam.getRealDefaultText());
         htmlFormElement.setDefaultValue(queryParam.getRealDefaultValue());
         htmlFormElement.setComment(queryParam.getComment());
+        htmlFormElement.setNeedHidden(queryParam.isNeedHidden());
     }
 
     
